@@ -4,3 +4,8 @@ cache/
 artifacts/
 typechain-types/
 .env.local
+
+artifacts/
+cache/
+scripts/
+submit.js
