@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayScope — Scoped Payment Authorization for AI Agents</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;color:#e6edf3;font-family:'Segoe UI',sans-serif;min-height:100vh}
+.hero{background:linear-gradient(135deg,#0d1117 0%,#161b22 100%);padding:60px 20px;text-align:center;border-bottom:1px solid #30363d}
+.hero h1{font-size:2.5em;font-weight:700;color:#58a6ff;margin-bottom:12px}
+.hero p{font-size:1.2em;color:#8b949e;max-width:600px;margin:0 auto 24px}
+.badge{display:inline-block;background:#21262d;border:1px solid #30363d;border-radius:20px;padding:6px 16px;font-size:.85em;color:#58a6ff;margin:4px}
+.section{max-width:900px;margin:0 auto;padding:40px 20px}
+.section h2{font-size:1.5em;color:#f0f6fc;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid #30363d}
+.terminal{background:#161b22;border:1px solid #30363d;border-radius:8px;overflow:hidden;margin:20px 0}
+.terminal-header{background:#21262d;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot-r{background:#ff5f57}
+.dot-y{background:#febc2e}
+.dot-g{background:#28c840}
+.terminal-title{color:#8b949e;font-size:.85em;margin-left:8px}
+.terminal-body{padding:20px;font-family:'Courier New',monospace;font-size:.9em;line-height:1.7}
+.line-dim{color:#8b949e}
+.line-green{color:#3fb950}
+.line-blue{color:#58a6ff}
+.line-yellow{color:#d29922}
+.line-red{color:#f85149}
+.line-white{color:#e6edf3}
+.line-box{color:#79c0ff;font-weight:bold}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px}
+.card h3{color:#58a6ff;margin-bottom:8px;font-size:1em}
+.card p{color:#8b949e;font-size:.9em;line-height:1.5}
+.tx-list{list-style:none}
+.tx-list li{padding:12px 0;border-bottom:1px solid #21262d;font-family:'Courier New',monospace;font-size:.85em}
+.tx-list li:last-child{border-bottom:none}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;font-weight:600;margin-right:8px}
+.tag-green{background:#1a4731;color:#3fb950}
+.tag-red{background:#3d1c1c;color:#f85149}
+.tag-blue{background:#1c2d4a;color:#58a6ff}
+.footer{text-align:center;padding:40px 20px;color:#8b949e;border-top:1px solid #21262d;font-size:.9em}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>PayScope</h1>
+  <p>Scoped payment authorization for AI agents on Ethereum.<br>Agents spend within limits — enforced by smart contract, not trust.</p>
+  <span class="badge">🏆 The Synthesis 2026</span>
+  <span class="badge">⛓️ Sepolia Testnet</span>
+  <span class="badge">🤖 OpenClaw + Claude</span>
+</div>
+
+<div class="section">
+  <h2>The Problem</h2>
+  <div class="cards">
+    <div class="card"><h3>No spending limits</h3><p>AI agents with wallet access can drain your entire balance — there's nothing stopping them.</p></div>
+    <div class="card"><h3>No purpose enforcement</h3><p>An agent authorized to pay for "cloud services" can just as easily pay for anything else.</p></div>
+    <div class="card"><h3>No audit trail</h3><p>You can't verify what was spent, when, or why — until it's too late.</p></div>
+  </div>
+
+  <h2>The Solution</h2>
+  <div class="cards">
+    <div class="card"><h3>💰 Scoped budgets</h3><p>Fund a scope with exactly the ETH you want an agent to spend. Contract enforces the limit.</p></div>
+    <div class="card"><h3>🎯 Purpose binding</h3><p>Agents can only spend for the declared purpose. "cloud services only" means exactly that.</p></div>
+    <div class="card"><h3>📋 On-chain audit</h3><p>Every payment is logged on-chain with a memo. Immutable, verifiable, permanent.</p></div>
+    <div class="card"><h3>🔒 Owner control</h3><p>Revoke any scope instantly. Unspent ETH returned immediately. No lockup.</p></div>
+  </div>
+
+  <h2>Live Demo — Sepolia Testnet</h2>
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="terminal-title">node demo.js</span>
+    </div>
+    <div class="terminal-body">
+      <div class="line-box">╔════════════════════════════════════════════╗</div>
+      <div class="line-box">║  PayScope AI Agent — Live Demo on Sepolia  ║</div>
+      <div class="line-box">╚════════════════════════════════════════════╝</div>
+      <br>
+      <div class="line-dim">Contract :  <a href="https://sepolia.etherscan.io/address/0x856737FA015CBFB3a9e87cE047CB5D5f46905DFB" target="_blank">0x856737FA015CBFB3a9e87cE047CB5D5f46905DFB ↗</a></div>
+      <div class="line-dim">Network  :  Sepolia Testnet</div>
+      <br>
+      <div class="line-box">╔═══════════════════════════════════════════════════════╗</div>
+      <div class="line-box">║  Step 1 — Owner creates a payment scope for AI agent  ║</div>
+      <div class="line-box">╚═══════════════════════════════════════════════════════╝</div>
+      <br>
+      <div class="line-dim">Purpose  :  cloud services only</div>
+      <div class="line-dim">Budget   :  0.005 ETH</div>
+      <div class="line-dim">Tx sent  :  <a href="https://sepolia.etherscan.io/tx/0x59382cb9a7f109771b887c26726cd9a31a4a14fc3380e8bc9adaf231f9d5ca1f" target="_blank">0x59382cb9...5ca1f ↗</a></div>
+      <div class="line-green">Confirmed in block 10497530 ✓</div>
+      <br>
+      <div class="line-box">╔══════════════════════════════════════════════╗</div>
+      <div class="line-box">║  Step 3 — Agent executes legitimate payment  ║</div>
+      <div class="line-box">╚══════════════════════════════════════════════╝</div>
+      <br>
+      <div class="line-dim">Request  :  Pay 0.001 ETH for "cloud storage service"</div>
+      <div class="line-green">Agent evaluating... purpose matches scope "cloud services only" ✓</div>
+      <div class="line-green">Agent evaluating... amount 0.001 ETH within budget 0.005 ETH ✓</div>
+      <div class="line-green">Agent decision: APPROVED</div>
+      <div class="line-dim">Tx sent  :  <a href="https://sepolia.etherscan.io/tx/0x4ff81c9826cc5d60ad25c7737b35b6b51f98963624706bd4f7e92f799a4e14a2" target="_blank">0x4ff81c98...4e14a2 ↗</a></div>
+      <div class="line-green">Payment confirmed in block 10497531 ✓</div>
+      <br>
+      <div class="line-box">╔═══════════════════════════════════════════════╗</div>
+      <div class="line-box">║  Step 4 — Agent rejects out-of-scope request  ║</div>
+      <div class="line-box">╚═══════════════════════════════════════════════╝</div>
+      <br>
+      <div class="line-dim">Request  :  Pay 0.001 ETH for "buy NFTs"</div>
+      <div class="line-red">Agent evaluating... purpose "buy NFTs" does NOT match scope "cloud services only" ✗</div>
+      <div class="line-red">Agent decision: REJECTED — purpose mismatch, payment blocked.</div>
+      <div class="line-dim">(No transaction sent, no gas spent)</div>
+      <br>
+      <div class="line-box">╔═════════════════════════════════╗</div>
+      <div class="line-box">║  Step 5 — On-chain audit trail  ║</div>
+      <div class="line-box">╚═════════════════════════════════╝</div>
+      <br>
+      <div class="line-green">Total payments executed: 1</div>
+      <div class="line-dim">  Tx   : <a href="https://sepolia.etherscan.io/tx/0x4ff81c9826cc5d60ad25c7737b35b6b51f98963624706bd4f7e92f799a4e14a2" target="_blank">0x4ff81c98...4e14a2 ↗</a></div>
+      <div class="line-dim">  Amt  : 0.001 ETH</div>
+      <div class="line-dim">  Memo : cloud storage service</div>
+      <div class="line-blue">Remaining budget: 0.004 ETH</div>
+    </div>
+  </div>
+
+  <h2>On-chain Transactions</h2>
+  <ul class="tx-list">
+    <li><span class="tag tag-blue">DEPLOY</span> Contract deployed → <a href="https://sepolia.etherscan.io/address/0x856737FA015CBFB3a9e87cE047CB5D5f46905DFB" target="_blank">0x856737FA015CBFB3a9e87cE047CB5D5f46905DFB ↗</a></li>
+    <li><span class="tag tag-blue">SCOPE</span> Payment scope created (0.005 ETH budget, "cloud services only") → <a href="https://sepolia.etherscan.io/tx/0x59382cb9a7f109771b887c26726cd9a31a4a14fc3380e8bc9adaf231f9d5ca1f" target="_blank">0x59382cb9... ↗</a></li>
+    <li><span class="tag tag-green">APPROVED</span> Agent pays 0.001 ETH for "cloud storage service" → <a href="https://sepolia.etherscan.io/tx/0x4ff81c9826cc5d60ad25c7737b35b6b51f98963624706bd4f7e92f799a4e14a2" target="_blank">0x4ff81c98... ↗</a></li>
+    <li><span class="tag tag-red">REJECTED</span> Agent blocks "buy NFTs" — purpose mismatch, no tx sent</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>Built by <strong>狗子</strong> (AI Agent on OpenClaw) for <strong>The Synthesis 2026 Hackathon</strong></p>
+  <p style="margin-top:8px">
+    <a href="https://github.com/chenruiqi-hash/payscope" target="_blank">GitHub ↗</a> &nbsp;·&nbsp;
+    <a href="https://sepolia.etherscan.io/address/0x856737FA015CBFB3a9e87cE047CB5D5f46905DFB" target="_blank">Contract ↗</a> &nbsp;·&nbsp;
+    <a href="https://synthesis.md" target="_blank">The Synthesis ↗</a>
+  </p>
+</div>
+</body>
+</html>
